@@ -129,7 +129,7 @@ public class OracleDBUtilLib {
     }
 
     /**
-     * Converts a given ResultSet into a nested list structure ( List of List of Maps ).
+     * Converts a given ResultSet into a nested list structure ( List of List of Maps<String,Object> ).
      *
      * The outer list contains rows, each of which is represented as a list of column-value mappings.
      * Each column-value mapping is represented as a Map where the key is the column name and the value
