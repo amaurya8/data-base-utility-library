@@ -13,6 +13,8 @@ generating java doc html doc:
 
 javadoc -d docs -sourcepath src -subpackages com.example
 
+javadoc -d docs -sourcepath src src/com/aisa/oracle/OracleDBUtilLib.java
+
 	•	-d docs: Specifies the output directory for the generated HTML files (in this case, a directory named docs).
 	•	-sourcepath src: Specifies the root directory of your source files (in this case, a directory named src).
 	•	-subpackages com.example: Specifies the root package (or packages) for which you want to generate documentation. This example uses com.example.
