@@ -1,0 +1,18 @@
+In general terms, this is called a method documentation comment or Javadoc comment. Javadoc comments are used in Java to describe the purpose, parameters, return values, and any exceptions thrown by a method. They are typically written using the /** ... */ syntax and are used to generate HTML documentation for the code using the Javadoc tool.
+
+Here’s the general structure of a Javadoc comment:
+
+	•	Description: A brief explanation of what the method does.
+	•	Parameters: @param tags for each parameter, describing their purpose.
+	•	Returns: An @return tag describing what the method returns.
+	•	Exceptions: @throws tags for any exceptions that the method might throw.
+
+In your case, the Javadoc comment describes the parseResultSet method, including its purpose, parameters, return value, and the exception it might throw.
+
+generating java doc html doc:
+
+javadoc -d docs -sourcepath src -subpackages com.example
+
+	•	-d docs: Specifies the output directory for the generated HTML files (in this case, a directory named docs).
+	•	-sourcepath src: Specifies the root directory of your source files (in this case, a directory named src).
+	•	-subpackages com.example: Specifies the root package (or packages) for which you want to generate documentation. This example uses com.example.
