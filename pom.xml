@@ -90,6 +90,18 @@
                     <target>1.8</target>
                 </configuration>
             </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                        <version>3.3.1</version>
+                        <configuration>
+                            <sourcepath>src/main/java</sourcepath>
+                            <classpath>
+                                <path>target/classes</path>
+                            </classpath>
+                            <aggregate>true</aggregate>
+                        </configuration>
+                    </plugin>
         </plugins>
     </build>
 </project>
