@@ -12,9 +12,9 @@ import org.slf4j.LoggerFactory;
  * establishing connections, executing queries and updates,
  * and converting ResultSets to more usable formats.
  */
-public class DB2Utility {
+public class DB2UtilLib {
 
-    private static final Logger logger = LoggerFactory.getLogger(DB2Utility.class);
+    private static final Logger logger = LoggerFactory.getLogger(DB2UtilLib.class);
 
     private static final String JDBC_DRIVER = "com.ibm.db2.jcc.DB2Driver";
 

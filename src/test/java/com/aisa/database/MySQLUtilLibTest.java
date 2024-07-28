@@ -1,16 +1,22 @@
 package com.aisa.database;
 
-import org.junit.jupiter.api.*;
-import org.mockito.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
+import org.mockito.MockedStatic;
+import org.mockito.MockitoAnnotations;
 
 import java.sql.*;
-import java.util.*;
+import java.util.List;
+import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.times;
 
-public class DB2UtilityTest {
-
+public class MySQLUtilLibTest {
     @Mock
     private Connection mockConnection;
 
@@ -35,11 +41,10 @@ public class DB2UtilityTest {
     public void testGetConnection() throws SQLException {
         try (MockedStatic<DriverManager> mockedDriverManager = mockStatic(DriverManager.class)) {
             mockedDriverManager.when(() -> DriverManager.getConnection(anyString(), anyString(), anyString())).thenReturn(mockConnection);
-
-            String dbUrl = "jdbc:db2://localhost:50000/tests-data-cloud";
+            String dbUrl = "jdbc:mysql://localhost:3306/tests-data-cloud";
             String user = "data-cloud";
             String password = "data-cloud";
-            Connection connection = PostgreSQLUtilLib.getConnection(dbUrl, user, password);
+            Connection connection = MySQLUtilLib.getConnection(dbUrl, user, password);
             assertNotNull(connection);
             assertEquals(mockConnection, connection);
         }
@@ -49,7 +54,7 @@ public class DB2UtilityTest {
         String query = "SELECT * FROM SAMPLE_DATA_CLOUD_TABLE";
         when(mockStatement.executeQuery(query)).thenReturn(mockResultSet);
 
-        ResultSet resultSet = DB2Utility.executeQuery(mockConnection, query);
+        ResultSet resultSet = MySQLUtilLib.executeQuery(mockConnection, query);
         assertNotNull(resultSet);
     }
 
@@ -58,7 +63,7 @@ public class DB2UtilityTest {
         String update = "UPDATE SAMPLE_TABLE SET COLUMN_NAME = 'value'";
         when(mockStatement.executeUpdate(update)).thenReturn(1);
 
-        int rowsAffected = DB2Utility.executeUpdate(mockConnection, update);
+        int rowsAffected = MySQLUtilLib.executeUpdate(mockConnection, update);
         assertEquals(1, rowsAffected);
     }
 
@@ -69,40 +74,40 @@ public class DB2UtilityTest {
         when(mockResultSetMetaData.getColumnName(1)).thenReturn("COLUMN_NAME");
         when(mockResultSet.getObject(1)).thenReturn("value");
 
-        List<Map<String, Object>> resultList = DB2Utility.resultSetToList(mockResultSet);
+        List<Map<String, Object>> resultList = MySQLUtilLib.resultSetToList(mockResultSet);
         assertEquals(1, resultList.size());
         assertEquals("value", resultList.get(0).get("COLUMN_NAME"));
     }
 
     @Test
     public void testCommitTransaction() throws SQLException {
-        DB2Utility.commitTransaction(mockConnection);
+        MySQLUtilLib.commitTransaction(mockConnection);
         verify(mockConnection, times(1)).commit();
         verify(mockConnection, times(1)).setAutoCommit(true);
     }
 
     @Test
     public void testRollbackTransaction() throws SQLException {
-        DB2Utility.rollbackTransaction(mockConnection);
+        MySQLUtilLib.rollbackTransaction(mockConnection);
         verify(mockConnection, times(1)).rollback();
         verify(mockConnection, times(1)).setAutoCommit(true);
     }
 
     @Test
     public void testCloseConnection() throws SQLException {
-        DB2Utility.closeConnection(mockConnection);
+        MySQLUtilLib.closeConnection(mockConnection);
         verify(mockConnection, times(1)).close();
     }
 
     @Test
     public void testCloseStatement() throws SQLException {
-        DB2Utility.closeStatement(mockStatement);
+        MySQLUtilLib.closeStatement(mockStatement);
         verify(mockStatement, times(1)).close();
     }
 
     @Test
     public void testCloseResultSet() throws SQLException {
-        DB2Utility.closeResultSet(mockResultSet);
+        MySQLUtilLib.closeResultSet(mockResultSet);
         verify(mockResultSet, times(1)).close();
     }
 }
