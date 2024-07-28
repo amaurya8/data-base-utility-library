@@ -41,6 +41,7 @@ public class MySQLUtilLibTest {
     public void testGetConnection() throws SQLException {
         try (MockedStatic<DriverManager> mockedDriverManager = mockStatic(DriverManager.class)) {
             mockedDriverManager.when(() -> DriverManager.getConnection(anyString(), anyString(), anyString())).thenReturn(mockConnection);
+
             String dbUrl = "jdbc:mysql://localhost:3306/tests-data-cloud";
             String user = "data-cloud";
             String password = "data-cloud";

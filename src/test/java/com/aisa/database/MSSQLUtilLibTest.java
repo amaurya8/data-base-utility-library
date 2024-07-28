@@ -3,6 +3,7 @@ package com.aisa.database;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
+import org.mockito.MockedStatic;
 import org.mockito.MockitoAnnotations;
 
 import java.sql.*;
@@ -36,14 +37,17 @@ public class MSSQLUtilLibTest {
 
     @Test
     public void testGetConnection() throws SQLException {
-        // Arrange
+        try (MockedStatic<DriverManager> mockedDriverManager = mockStatic(DriverManager.class)) {
+            mockedDriverManager.when(() -> DriverManager.getConnection(anyString(), anyString(), anyString())).thenReturn(mockConnection);
+
+            // Arrange
         String dbUrl = "jdbc:sqlserver://localhost:1433;databaseName=testDB";
         String user = "testUser";
         String password = "testPassword";
 
-        // Mock the DriverManager to return the mock connection
-        mockStatic(DriverManager.class);
-        when(DriverManager.getConnection(dbUrl, user, password)).thenReturn(mockConnection);
+//        // Mock the DriverManager to return the mock connection
+//        mockStatic(DriverManager.class);
+//        when(DriverManager.getConnection(dbUrl, user, password)).thenReturn(mockConnection);
 
         // Act
         Connection connection = MSSQLUtilLib.getConnection(dbUrl, user, password);
@@ -51,7 +55,7 @@ public class MSSQLUtilLibTest {
         // Assert
         assertNotNull(connection);
         assertEquals(mockConnection, connection);
-    }
+    }}
 
     @Test
     public void testExecuteQuery() throws SQLException {
