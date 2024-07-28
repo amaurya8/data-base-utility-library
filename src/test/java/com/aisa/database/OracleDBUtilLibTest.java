@@ -1,4 +1,4 @@
-package com.aisa.oracle;
+package com.aisa.database;
 
 import org.junit.jupiter.api.*;
 import org.mockito.*;
@@ -40,7 +40,6 @@ class OracleDBUtilLibTest {
 
             Connection connection = OracleDBUtilLib.getConnection(url, username, password);
             assertNotNull(connection);
-//            mockedDriverManager.verify(() -> DriverManager.getConnection(url, username, password), times(1));
         }
     }
 
