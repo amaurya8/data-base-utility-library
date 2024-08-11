@@ -39,17 +39,16 @@
             <artifactId>slf4j-api</artifactId>
             <version>1.7.30</version>
         </dependency>
-        <!-- JUnit 5 dependencies -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
-            <version>5.7.1</version>
+            <version>5.8.2</version> <!-- or the version you are using -->
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
-            <version>5.7.1</version>
+            <version>5.8.2</version> <!-- or the version you are using -->
             <scope>test</scope>
         </dependency>
 
@@ -109,18 +108,23 @@
                     <target>1.8</target>
                 </configuration>
             </plugin>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-javadoc-plugin</artifactId>
-                        <version>3.3.1</version>
-                        <configuration>
-                            <sourcepath>src/main/java</sourcepath>
-                            <classpath>
-                                <path>target/classes</path>
-                            </classpath>
-                            <aggregate>true</aggregate>
-                        </configuration>
-                    </plugin>
+<!--                    <plugin>-->
+<!--                        <groupId>org.apache.maven.plugins</groupId>-->
+<!--                        <artifactId>maven-javadoc-plugin</artifactId>-->
+<!--                        <version>3.3.1</version>-->
+<!--                        <configuration>-->
+<!--                            <sourcepath>src/main/java</sourcepath>-->
+<!--                            <classpath>-->
+<!--                                <path>target/classes</path>-->
+<!--                            </classpath>-->
+<!--                            <aggregate>true</aggregate>-->
+<!--                        </configuration>-->
+<!--                    </plugin>-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.3.1</version>
+            </plugin>
         </plugins>
     </build>
 </project>

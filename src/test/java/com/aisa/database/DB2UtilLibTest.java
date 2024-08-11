@@ -39,7 +39,7 @@ public class DB2UtilLibTest {
             String dbUrl = "jdbc:db2://localhost:50000/tests-data-cloud";
             String user = "data-cloud";
             String password = "data-cloud";
-            Connection connection = PostgreSQLUtilLib.getConnection(dbUrl, user, password);
+            Connection connection = DB2UtilLib.getConnection(dbUrl, user, password);
             assertNotNull(connection);
             assertEquals(mockConnection, connection);
         }

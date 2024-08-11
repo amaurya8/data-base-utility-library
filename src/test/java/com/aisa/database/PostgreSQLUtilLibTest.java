@@ -1,15 +1,17 @@
 package com.aisa.database;
 
-import static org.mockito.Mockito.*;
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
+import org.mockito.MockedStatic;
+import org.mockito.MockitoAnnotations;
 
 import java.sql.*;
 import java.util.List;
 import java.util.Map;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.mockito.*;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
 public class PostgreSQLUtilLibTest {
 
@@ -27,6 +29,7 @@ public class PostgreSQLUtilLibTest {
 
     @BeforeEach
     public void setUp() throws SQLException {
+        System.out.println("Opening Mocks..!");
         MockitoAnnotations.openMocks(this);
         when(mockConnection.createStatement()).thenReturn(mockStatement);
         when(mockStatement.executeQuery(anyString())).thenReturn(mockResultSet);
@@ -36,6 +39,7 @@ public class PostgreSQLUtilLibTest {
         when(mockResultSetMetaData.getColumnName(1)).thenReturn("Employee_Name");
         when(mockResultSet.getObject(1)).thenReturn("DataCloud");
     }
+
 
     @Test
     public void testGetConnection() throws SQLException {
